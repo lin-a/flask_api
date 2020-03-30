@@ -46,7 +46,7 @@ def predict():
         print('Animal: ', animal)
 
         # result
-        return jsonify({"animal": animal_class})
+        return jsonify({"animal": animal})
 
 
 # Run Server
