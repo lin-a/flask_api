@@ -41,7 +41,9 @@ def predict():
         img = image.img_to_array(img)
         img = np.expand_dims(img, axis=0)
         animal_class = model.predict_classes(img).tolist()
-        print(animal_class)
+        animal = labels[animal_class[0]]
+        print('Index: ', animal_class)
+        print('Animal: ', animal)
 
         # result
         return jsonify({"animal": animal_class})
