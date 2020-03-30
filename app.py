@@ -32,14 +32,16 @@ labels = ['butterfly',
 @app.route('/predict', methods=['POST'])
 def predict():
     if request.method == 'POST':
-        print(request.form.get('image'))
+        # print(request.form.get('image'))
         b64_string = request.form.get('image')
-        # do image classification here
         # img = image.load_img(img, target_size=(width, height))
         img = PIL.Image.open(BytesIO(base64.b64decode(b64_string))).convert('RGB')
         img = img.resize((height, width))
         img = image.img_to_array(img)
+        img = img / 255
         img = np.expand_dims(img, axis=0)
+        print(img.shape)
+        # do image classification here
         animal_class = model.predict_classes(img).tolist()
         animal = labels[animal_class[0]]
         print('Index: ', animal_class)
